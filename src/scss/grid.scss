@@ -1,0 +1,36 @@
+.grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+
+	column-gap: var(--pae-gap-x, 1rem);
+	row-gap: var(--pae-gap-y, 1rem);
+
+	& > div {
+		box-sizing: border-box;
+	}
+
+	@each $breakpoint-prefix, $breakpoint-value in $breakpoints {
+		@media (min-width: $breakpoint-value) {
+			@for $c1 from 1 through $columns {
+				@for $c2 from 1 through $columns {
+					&[class~="#{$breakpoint-prefix}#{$c1}x#{$c2}"] {
+						grid-template-rows: repeat(#{$c1}, 1fr);
+						grid-template-columns: repeat(#{$c2}, 1fr);
+					}
+
+					& > div {
+						&[class~="#{$breakpoint-prefix}#{$c1}x#{$c2}"] {
+							grid-row-end: span #{$c1};
+							grid-column-end: span #{$c2};
+						}
+
+						&[class~="#{$breakpoint-prefix}@#{$c1},#{$c2}"] {
+							grid-row-start: #{$c1};
+							grid-column-start: #{$c2};
+						}
+					}
+				}
+			}
+		}
+	}
+}

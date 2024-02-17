@@ -1,0 +1,32 @@
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+
+	column-gap: var(--pae-gap-x, 1rem);
+	row-gap: var(--pae-gap-y, 1rem);
+
+	& > div {
+		flex: 1;
+		box-sizing: border-box;
+		word-wrap: break-word;
+
+		@each $breakpoint-prefix, $breakpoint-value in $breakpoints {
+			@media (min-width: $breakpoint-value) {
+				@for $c1 from 1 through $columns {
+					@for $c2 from 1 through $columns {
+						@if $c1 <= $c2 {
+							&[class~="#{$breakpoint-prefix}#{$c1}/#{$c2}"] {
+								flex: 0 0 auto;
+								width: calc(($c1 / $c2 * 100%) - (var(--pae-gap-x, 1rem)) + (var(--pae-gap-x, 1rem) / $c2 * $c1));
+							}
+						}
+					}
+
+					&[class~="#{$breakpoint-prefix}o-#{$c1}"] {
+						order: #{$c1} !important;
+					}
+				}
+			}
+		}
+	}
+}

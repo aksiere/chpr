@@ -1,0 +1,90 @@
+@each $breakpoint-prefix, $breakpoint-value in $breakpoints {
+	@media (min-width: $breakpoint-value) {
+		@each $gap-prefix, $gap-value in $gaps {
+			[class~="#{$breakpoint-prefix}g-#{$gap-prefix}"] {
+				--pae-gap-x: #{$gap-value};
+				--pae-gap-y: #{$gap-value};
+			}
+
+			[class~="#{$breakpoint-prefix}gx-#{$gap-prefix}"] {
+				--pae-gap-x: #{$gap-value} !important;
+			}
+
+			[class~="#{$breakpoint-prefix}gy-#{$gap-prefix}"] {
+				--pae-gap-y: #{$gap-value} !important;
+			}
+		}
+
+		@each $gap-prefix, $gap-value in $gaps {
+			[class~="#{$breakpoint-prefix}p-#{$gap-prefix}"] { padding: #{$gap-value} !important; }
+			[class~="#{$breakpoint-prefix}px-#{$gap-prefix}"] { padding-inline: #{$gap-value} !important; }
+			[class~="#{$breakpoint-prefix}py-#{$gap-prefix}"] { padding-block: #{$gap-value} !important; }
+			[class~="#{$breakpoint-prefix}pl-#{$gap-prefix}"] { padding-left: #{$gap-value} !important; }
+			[class~="#{$breakpoint-prefix}pr-#{$gap-prefix}"] { padding-right: #{$gap-value} !important; }
+			[class~="#{$breakpoint-prefix}pt-#{$gap-prefix}"] { padding-top: #{$gap-value} !important; }
+			[class~="#{$breakpoint-prefix}pb-#{$gap-prefix}"] { padding-bottom: #{$gap-value} !important; }
+
+			[class~="#{$breakpoint-prefix}m-#{$gap-prefix}"] { margin: #{$gap-value} !important; }
+			[class~="#{$breakpoint-prefix}mx-#{$gap-prefix}"] { margin-inline: #{$gap-value} !important; }
+			[class~="#{$breakpoint-prefix}my-#{$gap-prefix}"] { margin-block: #{$gap-value} !important; }
+			[class~="#{$breakpoint-prefix}ml-#{$gap-prefix}"] { margin-left: #{$gap-value} !important; }
+			[class~="#{$breakpoint-prefix}mr-#{$gap-prefix}"] { margin-right: #{$gap-value} !important; }
+			[class~="#{$breakpoint-prefix}mt-#{$gap-prefix}"] { margin-top: #{$gap-value} !important; }
+			[class~="#{$breakpoint-prefix}mb-#{$gap-prefix}"] { margin-bottom: #{$gap-value} !important; }
+		}
+
+		[class~="#{$breakpoint-prefix}p-a"] { padding: auto !important; }
+		[class~="#{$breakpoint-prefix}px-a"] { padding-inline: auto !important; }
+		[class~="#{$breakpoint-prefix}py-a"] { padding-block: auto !important; }
+		[class~="#{$breakpoint-prefix}pl-a"] { padding-left: auto !important; }
+		[class~="#{$breakpoint-prefix}pr-a"] { padding-right: auto !important; }
+		[class~="#{$breakpoint-prefix}pt-a"] { padding-top: auto !important; }
+		[class~="#{$breakpoint-prefix}pb-a"] { padding-bottom: auto !important; }
+
+		[class~="#{$breakpoint-prefix}m-a"] { margin: auto !important; }
+		[class~="#{$breakpoint-prefix}mx-a"] { margin-inline: auto !important; }
+		[class~="#{$breakpoint-prefix}my-a"] { margin-block: auto !important; }
+		[class~="#{$breakpoint-prefix}ml-a"] { margin-left: auto !important; }
+		[class~="#{$breakpoint-prefix}mr-a"] { margin-right: auto !important; }
+		[class~="#{$breakpoint-prefix}mt-a"] { margin-top: auto !important; }
+		[class~="#{$breakpoint-prefix}mb-a"] { margin-bottom: auto !important; }
+
+		@each $display in none, flex, grid, block {
+			[class~="#{$breakpoint-prefix}d-#{$display}"] {
+				display: #{$display};
+			}
+		}
+	
+		@each $direction in row, row-reverse, column, column-reverse {
+			[class~="#{$breakpoint-prefix}#{$direction}"] {
+				flex-direction: #{$direction};
+			}
+		}
+
+		@each $type in start, end, flex-start, flex-end, center, space-between, space-around, space-evenly, stretch {
+			[class~="#{$breakpoint-prefix}justify-#{$type}"] {
+				justify-content: #{$type};
+			}
+		}
+
+		@each $type in start, end, flex-start, flex-end, self-start, self-end, center, stretch {
+			[class~="#{$breakpoint-prefix}align-#{$type}"] {
+				align-items: #{$type};
+			}
+		}
+
+		@each $type in start, end, flex-start, flex-end, self-start, self-end, center, stretch {
+			[class~="#{$breakpoint-prefix}place-#{$type}"] {
+				place-items: #{$type};
+			}
+		}
+	
+		@for $c from 0 through 100 {
+			[class~="#{$breakpoint-prefix}#{$c}h"] { height: calc(#{$c} * 1%); }
+			[class~="#{$breakpoint-prefix}#{$c}vh"] { height: #{$c}vh; }
+			[class~="#{$breakpoint-prefix}#{$c}svh"] { height: #{$c}svh; }
+			[class~="#{$breakpoint-prefix}#{$c}lvh"] { height: #{$c}lvh; }
+			[class~="#{$breakpoint-prefix}#{$c}dvh"] { height: #{$c}dvh; }
+		}
+	}
+}

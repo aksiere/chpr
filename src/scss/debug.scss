@@ -1,0 +1,18 @@
+:is(.flex, .grid) {
+	&[data-debug] > div {
+		display: grid;
+		place-items: center;
+		border: 1px dashed var(--background-90);
+		border-radius: 8px;
+		padding: 4px;
+		counter-increment: section;
+	
+		&::before {
+			content: "(" counter(section) ")";
+		}
+	
+		&[class]::before {
+			content: "(" counter(section) ") " attr(class);
+		}
+	}
+}

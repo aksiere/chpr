@@ -1,0 +1,49 @@
+:root {
+	--palette-0: #121212;
+	--palette-1: #1B1B1B;
+	--palette-2: #252525;
+	--palette-3: #484848;
+	--palette-4: #5C5C5C;
+	--palette-5: #6F6F6F;
+	--palette-6: #969696;
+	--palette-7: #BDBDBD;
+	--palette-8: #DCDCDC;
+	--palette-9: #FAFAFA;
+
+	--primary: #6374ce;
+
+	--font: 400 16px/24px 'Inter', sans-serif;
+	--font-feature-settings: 'liga' 1, 'calt' 1, 'dlig' 1, 'tnum' 1, 'zero' 1, 'ss02' 1, 'ss07' 1, 'ss08' 1;
+
+	--border-radius: 10px;
+	--border-radius-rounded: 132rem;
+
+	--transition: .15s ease-in-out;
+	--transition-slower: .25s ease-in-out;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font: var(--font);
+	font-feature-settings: var(--font-feature-settings);
+	background: var(--palette-0);
+	color: var(--palette-9);
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+	font-weight: 400;
+	margin: 0;
+	line-height: 1.25em;
+}
+
+.muted {
+	color: var(--palette-5);
+}

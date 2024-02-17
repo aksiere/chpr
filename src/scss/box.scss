@@ -1,0 +1,4 @@
+.box {
+	margin-inline: auto !important;
+	max-width: map-get($breakpoints, "xl:");
+}
