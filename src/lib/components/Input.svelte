@@ -2,47 +2,58 @@
 	export let fluid
 	export let label
 	export let value
+	export let _this
 </script>
 
 <div class='wrapper'>
 	{#if label}
 		<p class='label mb-2'>{label}</p>
 	{/if}
-	<input type='text' bind:value={value} {...$$restProps} class:fluid={fluid}>
+	<input type='text' bind:this={_this} bind:value={value} {...$$restProps} class:fluid={fluid}>
 	<!-- <div class='bg'></div> -->
 </div>
 
 <style>
-	.wrapper input {
-		border: none;
-		outline: 2px solid transparent;
-		outline-offset: 2px;
-		border: 2px solid var(--palette-2);
-		background: var(--palette-2);
-		padding: .5rem .75rem;
-		border-radius: var(--border-radius);
-		font: inherit;
-		color: inherit;
-		z-index: 1;
-		position: relative;
-	}
+	.wrapper {
+		padding: 2px;
 
-	.wrapper input.fluid {
-		width: 100%;
-	}
+		& input {
+			border: none;
+			outline: 2px solid transparent;
+			outline-offset: 2px;
+			border: 2px solid var(--palette-2);
+			background: var(--palette-2);
+			padding: .5rem .75rem;
+			border-radius: var(--border-radius);
+			font: inherit;
+			color: inherit;
+			z-index: 1;
+			position: relative;
+			transition: outline-color var(--transition), z-index calc(var(--transition-speed) * 2) ease-out;
 
-	.wrapper .label {
-		z-index: 1;
-		position: relative;
-		color: var(--palette-6);
-	}
+			&:focus {
+				outline-color: var(--primary);
+			}
 
-	.wrapper:focus-within input,
-	.wrapper:focus-within .label {
-		z-index: 3;
-	}
+			&.fluid {
+				width: 100%;
+			}
 
-	.wrapper:focus-within .label {
-		color: var(--palette-9);
+			& .label {
+				z-index: 1;
+				position: relative;
+				color: var(--palette-6);
+			}
+		}
+
+		&:focus-within {
+			& input, & .label {
+				z-index: 3;
+			}
+
+			& .label {
+				color: var(--palette-9);
+			}
+		}
 	}
 </style>

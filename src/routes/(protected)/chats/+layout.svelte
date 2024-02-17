@@ -32,7 +32,7 @@
 {#if names.length > 0}
 	<div class='box 100h'>
 		<div class='flex 100h'>
-			<div class='1/1 md:1/3 px-3 md:px-0 py-3' class:d-none={activeChat !== undefined} class:md:d-block={activeChat !== undefined}>
+			<div class='1/1 md:1/3 px-3 md:px-0 py-3 100h' style='position: relative; overflow-y: auto;' class:d-none={activeChat !== undefined} class:md:d-block={activeChat !== undefined}>
 				<ul>
 					{#each chats as { id, users }, i (id)}
 						<a href='/chats/{id}'>{nicknames[i]}</a>
@@ -50,3 +50,7 @@
 		<Loading />
 	</div>
 {/if}
+
+<style>
+
+</style>

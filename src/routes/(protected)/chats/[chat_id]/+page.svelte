@@ -5,6 +5,9 @@
 	import { beforeUpdate, onDestroy, onMount } from 'svelte'
 	import { afterUpdate, tick } from 'svelte'
 
+	import Input from '$lib/components/Input.svelte'
+	import DimOnFocusWithin from '$lib/components/DimOnFocusWithin.svelte'
+
 	export let data
 	$: ({ session, supabase, messages, activeChat } = data)
 
@@ -66,7 +69,7 @@
 				focusInput()
 			}
 		}}>
-			<input bind:this={input} type='text' name='message' autocomplete='off' placeholder='Написать сообщение..'>
+			<Input fluid bind:_this={input} type='text' name='message' autocomplete='off' placeholder='Написать сообщение..' />
 		</form>
 	</footer>
 </section>
@@ -84,18 +87,44 @@
 		min-height: 0px;
 	}
 
-	input {
-		width: 100%;
+	.wrapper {
+		/* -webkit-mask: linear-gradient(0deg, #0000, #000 10% 80%, #0000); */
+		padding-right: 1rem;
+		/* padding-block: 5rem; */
+
+		&::-webkit-scrollbar-thumb {
+			background-color: var(--palette-2);
+			border-radius: 4px;
+		}
+
+		&::-webkit-scrollbar {
+			width: 10px;
+		}
+		
+		&::-webkit-scrollbar-track {
+			background-color: var(--palette-1);
+		}
 	}
 
 	.messages {
+		gap: .25rem;
+
 		& .message {
-			width: clamp(200px, 50%, 400px);
+			display: inline-block;
+			width: fit-content;
+			padding: 0.5em 1em;
+
+			background-color: var(--palette-3);
+			border-radius: calc(var(--border-radius) * 1.5);
+			border-bottom-left-radius: calc(var(--border-radius) / 2);
 
 			&.outgoing {
 				text-align: right;
 				margin-left: auto;
-				width: clamp(200px, 50%, 400px);
+
+				background-color: var(--primary);
+				border-radius: calc(var(--border-radius) * 1.5);
+				border-bottom-right-radius: calc(var(--border-radius) / 2);
 			}
 		}
 	}

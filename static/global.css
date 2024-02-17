@@ -20,6 +20,9 @@
 
 	--transition: .15s ease-in-out;
 	--transition-slower: .25s ease-in-out;
+
+	--transition-speed: .15s;
+	--transition-type: ease-in-out;
 }
 
 *, *::before, *::after {
