@@ -37,7 +37,7 @@
 				<div class='1/1 md:1/3 px-3 md:px-0 py-3 100h' style='position: relative; overflow-y: auto;' class:d-none={activeChat !== undefined} class:md:d-block={activeChat !== undefined}>
 					<ul>
 						{#each chats as { id, users }, i (id)}
-							<li>
+							<li class='mt-3'>
 								<a href='/chats/{id}' class:active={activeChat === id}>
 									{#if avatars[i]}
 										<img src={avatars[i]} alt={names[i]}>
