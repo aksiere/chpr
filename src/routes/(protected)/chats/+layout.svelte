@@ -9,7 +9,7 @@
 	$: ({ activeChat } = data)
 
 	let names = [], avatars = [], nicknames = []
-	$: console.log(names)
+	// $: console.log(names)
 
 	if (browser) {
 		let promises = []

@@ -31,7 +31,7 @@
 
 	afterUpdate(() => {
 		if (messages) {
-			console.log(1)
+			// console.log(1)
 			scrollToBottom(document.querySelector('.wrapper'))
 		}
 	})

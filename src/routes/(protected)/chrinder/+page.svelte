@@ -4,13 +4,14 @@
 	import Switch from '$lib/components/Switch.svelte'
 	import Loading from '$lib/components/Loading.svelte'
 	import gsap from 'gsap'
+	import { page } from '$app/stores'
 
 	import { PUBLIC_API_URL } from '$env/static/public'
 
 	import { countries_translation } from '$lib/utils/countries'
 	import { browser } from '$app/environment'
 
-	const DEBUG = true
+	const DEBUG = false
 
 	export let data
 	let { supabase, session, date } = data
@@ -23,7 +24,7 @@
 	}
 
 	let ITSAMATCH = false
-	const duration = 2
+	const duration = 4
 	
 	function test1(node) {
 		let tl = gsap.timeline()
@@ -32,6 +33,10 @@
 		
 		tl.from(node, {
 			duration,
+			onStart: () => {
+				let audio = new Audio(`${$page.url.origin}/max.wav`)
+					audio.play()
+			},
 		})
 		.from('.words > span:nth-child(2) > div:nth-child(1)', {
 			xPercent,
@@ -61,7 +66,8 @@
 			opacity: 0,
 			onComplete: () => {
 				ITSAMATCH = false
-			}
+				// audio.pause()
+			},
 		}, duration)
 
 		return {

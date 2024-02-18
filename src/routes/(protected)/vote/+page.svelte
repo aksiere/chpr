@@ -1,8 +1,8 @@
 <script>
 	import { browser } from '$app/environment'
 	import { invalidateAll } from '$app/navigation'
-	import { onDestroy } from 'svelte'
-	import { enhance } from '$app/forms'
+	import { onDestroy, onMount } from 'svelte'
+	import { page } from '$app/stores'
 
 	import Loading from '$lib/components/Loading.svelte'
 	import Switch from '$lib/components/Switch.svelte'
@@ -17,6 +17,7 @@
 	$: days = Math.floor((until / 60 / 60 / 24) % 7)
 
 	let worker
+
 	if (browser) {
 		if (until) {
 			const workerURL = new URL(
@@ -40,8 +41,22 @@
 		}
 	}
 
+	let audio
+
+	onMount(() => {
+		audio = new Audio(`${$page.url.origin}/vote.wav`)
+		audio.play()
+		audio.addEventListener('timeupdate', function(e) {
+			if (this.currentTime > 6.75) {
+				this.currentTime = 3.126
+				this.play()
+			}
+		}, false)
+	})
+
 	onDestroy(() => {
 		worker?.terminate()
+		audio?.pause()
 	})
 
 	const uniqueArray = a => [...new Set(a.map(o => JSON.stringify(o)))].map(s => JSON.parse(s))
@@ -151,7 +166,7 @@
 					{/each}
 				</div>
 
-				<div class='1/1 p-3 d-flex b0 md:b1 mt-3' style='position: sticky; background: var(--palette-2); border-radius: var(--border-radius);'>
+				<div class='1/1 p-3 d-flex b0 md:b1 mt-3 cat' style='position: sticky; background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url({$page.url.origin}/vote_bg_output.gif); background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; border-radius: var(--border-radius);'>
 					<div class='d-flex align-center'>
 						<Switch id='show_translation' bind:checked={show_translation} />
 						<!-- svelte-ignore a11y-label-has-associated-control -->
