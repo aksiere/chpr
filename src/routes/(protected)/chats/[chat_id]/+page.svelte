@@ -119,6 +119,7 @@
 			display: inline-block;
 			width: fit-content;
 			padding: 0.5em 1em;
+			word-break: break-all;
 
 			background-color: var(--palette-3);
 			border-radius: calc(var(--border-radius) * 1.5);
