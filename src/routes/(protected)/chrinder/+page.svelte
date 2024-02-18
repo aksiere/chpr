@@ -175,10 +175,6 @@
 			if (likes.includes(match_id)) {
 				gsap.killTweensOf('.words')
 				ITSAMATCH = true
-				
-				const { data, error } = await supabase.from('chats').insert([
-					{ users: [user_id, session.user.id] },
-				]).select()
 			}
   		})
 	})
@@ -258,8 +254,20 @@
 				} else {
 					await supabase.from('likes').insert([{ match_id: target_id, timestamp }])
 					broadcast({ user_id: session.user.id, match_id: target_id, action: 'like' })
-					const { data: d1 } = await supabase.from('likes').select('user_id').eq('match_id', target_id).neq('user_id', session.user.id)
-					console.log(d1)
+					const { data: d1 } = await supabase.from('likes').select('user_id').eq('match_id', target_id).neq('user_id', session.user.id).eq('dislike', false)
+					// console.log(d1)
+
+					if (d1.length > 0) {
+						gsap.killTweensOf('.words')
+						ITSAMATCH = true
+
+						for (let i = 0; i < d1.length; i++) {
+							console.log(d1[i].user_id)
+							const { data, error } = await supabase.from('chats').insert([
+								{ users: [d1[i].user_id, session.user.id] },
+							]).select()
+						}
+					}
 				}
 
 				// likes.push(target_id) // svelte 5
