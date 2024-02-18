@@ -94,7 +94,7 @@
 	// $inspect(likes).with(console.log)
 
 	const getLikes = async () => {
-		let { data } = await supabase.from('likes').select('*')
+		let { data } = await supabase.from('likes').select('*').eq('user_id', session.user.id)
 		likes = data.map(l => +l.match_id)
 	}
 
@@ -258,6 +258,8 @@
 				} else {
 					await supabase.from('likes').insert([{ match_id: target_id, timestamp }])
 					broadcast({ user_id: session.user.id, match_id: target_id, action: 'like' })
+					const { data: d1 } = await supabase.from('likes').select('user_id').eq('match_id', target_id).neq('user_id', session.user.id)
+					console.log(d1)
 				}
 
 				// likes.push(target_id) // svelte 5
