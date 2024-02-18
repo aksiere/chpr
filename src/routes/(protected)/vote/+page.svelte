@@ -43,16 +43,18 @@
 
 	let audio
 
-	onMount(() => {
-		audio = new Audio(`${$page.url.origin}/vote.wav`)
-		audio.play()
-		audio.addEventListener('timeupdate', function(e) {
-			if (this.currentTime > 6.75) {
-				this.currentTime = 3.126
-				this.play()
-			}
-		}, false)
-	})
+	if (browser) {
+		if (!until && !message) {
+			audio = new Audio(`${$page.url.origin}/vote.wav`)
+			audio.play()
+			audio.addEventListener('timeupdate', function(e) {
+				if (this.currentTime > 6.75) {
+					this.currentTime = 3.126
+					this.play()
+				}
+			}, false)
+		}
+	}
 
 	onDestroy(() => {
 		worker?.terminate()
