@@ -34,7 +34,7 @@ const getDates = (now) => {
 	}
 }
 
-const VOTE_DAY = 0
+const VOTE_DAY = 6
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ parent }) {
