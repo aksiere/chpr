@@ -45,6 +45,7 @@ export async function load({ parent }) {
 
 	if (now.getDay() === VOTE_DAY) {
 		const { s1, e1, s2, e2 } = getDates(now)
+		console.log(s1, e1, s2, e2);
 
 		const { data: d1 } = await supabase.from('votes').select('*').is('like_id', null).eq('user_id', session.user.id).gt('timestamp', s2.getTime() / 1000).lt('timestamp', e2.getTime(e2) / 1000)
 		let isvoted = d1.length > 0 ? true : false
