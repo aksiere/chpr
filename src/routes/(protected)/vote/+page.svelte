@@ -159,9 +159,9 @@
 											— 
 											<img class='mx-2' loading='eager' src={fixture.response.teams.away.logo} height='16' alt=''> {translations[fixture.response.teams.away.logo]}
 										{:else}
-											{fixture.response.teams.home.name} <img class='mx-2' loading='eager' src={fixture.response.teams.home.logo} height='16' alt=''> 
+											{fixture.response.teams.home.name} <img class='mx-2' loading='eager' src='{$page.url.origin}/images/{fixture.response.teams.home.id}.png' height='16' alt=''> 
 											— 
-											<img class='mx-2' loading='eager' src={fixture.response.teams.away.logo} height='16' alt=''> {fixture.response.teams.away.name}
+											<img class='mx-2' loading='eager' src='{$page.url.origin}/images/{fixture.response.teams.away.id}.png' height='16' alt=''> {fixture.response.teams.away.name}
 										{/if}
 									</div>
 								{/if}
@@ -169,7 +169,7 @@
 						{/each}
 					</div>
 
-					<div class='1/1 p-3 d-flex b0 md:b1 mt-3 cat' style='position: sticky; background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url({$page.url.origin}/vote_bg_output.gif); background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; border-radius: var(--border-radius);'>
+					<div class='1/1 p-3 d-flex b0 md:b1 mt-3 cat' style='position: sticky; background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url({$page.url.origin}/vote_bg.gif); background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; border-radius: var(--border-radius);'>
 						<div class='d-flex align-center'>
 							<Switch id='show_translation' bind:checked={show_translation} />
 							<!-- svelte-ignore a11y-label-has-associated-control -->
