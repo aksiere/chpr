@@ -41,7 +41,7 @@
 	</main>
 
 	<footer>
-		<div class='box px-3 py-2 d-flex'>
+		<div class='box p-3 d-flex'>
 			<span>Chronos Project</span>
 			<span class='ml-a'>{new Date().getFullYear()}</span>
 		</div>

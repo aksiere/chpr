@@ -23,8 +23,6 @@
 				invalidateAll()
 			},
 		).subscribe()
-
-		focusInput()
 	})
 
 	// auto scroll
@@ -75,6 +73,10 @@
 </section>
 
 <style>
+	@keyframes detect-scroll {
+		from, to { --can-scroll: ; }
+	}
+
 	section {
 		display: flex;
 		flex-direction: column;
@@ -89,8 +91,12 @@
 
 	.wrapper {
 		/* -webkit-mask: linear-gradient(0deg, #0000, #000 10% 80%, #0000); */
-		padding-right: 1rem;
-		/* padding-block: 5rem; */
+		animation: detect-scroll linear;
+		animation-timeline: scroll(self);
+
+		--if-can-scroll: var(--can-scroll) 1rem;
+		--if-cant-scroll: 0;
+		padding-right: var(--if-can-scroll, var(--if-cant-scroll));
 
 		&::-webkit-scrollbar-thumb {
 			background-color: var(--palette-2);

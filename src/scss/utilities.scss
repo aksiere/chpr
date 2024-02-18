@@ -85,6 +85,7 @@
 			[class~="#{$breakpoint-prefix}#{$c}svh"] { height: #{$c}svh; }
 			[class~="#{$breakpoint-prefix}#{$c}lvh"] { height: #{$c}lvh; }
 			[class~="#{$breakpoint-prefix}#{$c}dvh"] { height: #{$c}dvh; }
+			[class~="#{$breakpoint-prefix}b#{$c}"] { bottom: #{$c}rem; }
 		}
 	}
 }
