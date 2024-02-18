@@ -67,7 +67,7 @@
 				focusInput()
 			}
 		}}>
-			<Input fluid bind:_this={input} type='text' name='message' autocomplete='off' placeholder='Написать сообщение..' />
+			<Input maxlength={128} fluid bind:_this={input} type='text' name='message' autocomplete='off' placeholder='Написать сообщение..' />
 		</form>
 	</footer>
 </section>
