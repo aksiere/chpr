@@ -42,18 +42,18 @@
 	}
 
 	let audio
+	let started = false
 
-	if (browser) {
-		if (!until && !message) {
-			audio = new Audio(`${$page.url.origin}/vote.wav`)
-			audio.play()
-			audio.addEventListener('timeupdate', function(e) {
-				if (this.currentTime > 6.75) {
-					this.currentTime = 3.126
-					this.play()
-				}
-			}, false)
-		}
+	const start = () => {
+		started = true
+		audio = new Audio(`${$page.url.origin}/vote.wav`)
+		audio.play()
+		audio.addEventListener('timeupdate', function(e) {
+			if (this.currentTime > 6.75) {
+				this.currentTime = 3.126
+				this.play()
+			}
+		}, false)
 	}
 
 	onDestroy(() => {
@@ -128,62 +128,68 @@
 			<p class='muted'>{pad(days)} : {pad(hours)} : {pad(minutes)} : {pad(seconds)}</p>
 		</div>
 	{:else}
-		<div class='box 100h'>
-			{#await getCandidates()}
-				<div class='d-grid place-center 100h'>
-					<Loading />
-				</div>
-			{:then}
-				<div class='flex p-3'>
-					{#each candidates as candidate, i}
-						{#await getFixture(candidate)}
-							<div class='card 1/1 md:1/2 d-flex align-center justify-center'>
-								{candidate}
-							</div>
-						{:then fixture}
-							<!-- svelte-ignore a11y-no-static-element-interactions -->
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							{#if fixture}
-								{#await getTranslation(fixture.response.teams.home.logo)}{/await}
-								{#await getTranslation(fixture.response.teams.away.logo)}{/await}
-
-								<div
-									class='card 1/1 md:1/2 d-flex align-center justify-center'
-									class:inactive={chosen.length >= max_chosen && !chosen.find(f => f.match_id === fixture.response.fixture.id)}
-									class:active={chosen.find(f => f.match_id === fixture.response.fixture.id)}
-									on:click={() => add(fixture)}
-								>
-									{#if show_translation}
-										{translations[fixture.response.teams.home.logo]} <img class='mx-2' loading='eager' src={fixture.response.teams.home.logo} height='16' alt=''> 
-										— 
-										<img class='mx-2' loading='eager' src={fixture.response.teams.away.logo} height='16' alt=''> {translations[fixture.response.teams.away.logo]}
-									{:else}
-										{fixture.response.teams.home.name} <img class='mx-2' loading='eager' src={fixture.response.teams.home.logo} height='16' alt=''> 
-										— 
-										<img class='mx-2' loading='eager' src={fixture.response.teams.away.logo} height='16' alt=''> {fixture.response.teams.away.name}
-									{/if}
+		{#if started}
+			<div class='box 100h'>
+				{#await getCandidates()}
+					<div class='d-grid place-center 100h'>
+						<Loading />
+					</div>
+				{:then}
+					<div class='flex p-3'>
+						{#each candidates as candidate, i}
+							{#await getFixture(candidate)}
+								<div class='card 1/1 md:1/2 d-flex align-center justify-center'>
+									{candidate}
 								</div>
-							{/if}
-						{/await}
-					{/each}
-				</div>
+							{:then fixture}
+								<!-- svelte-ignore a11y-no-static-element-interactions -->
+								<!-- svelte-ignore a11y-click-events-have-key-events -->
+								{#if fixture}
+									{#await getTranslation(fixture.response.teams.home.logo)}{/await}
+									{#await getTranslation(fixture.response.teams.away.logo)}{/await}
 
-				<div class='1/1 p-3 d-flex b0 md:b1 mt-3 cat' style='position: sticky; background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url({$page.url.origin}/vote_bg_output.gif); background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; border-radius: var(--border-radius);'>
-					<div class='d-flex align-center'>
-						<Switch id='show_translation' bind:checked={show_translation} />
-						<!-- svelte-ignore a11y-label-has-associated-control -->
-						<label class='ml-3'>Перевод</label>
+									<div
+										class='card 1/1 md:1/2 d-flex align-center justify-center'
+										class:inactive={chosen.length >= max_chosen && !chosen.find(f => f.match_id === fixture.response.fixture.id)}
+										class:active={chosen.find(f => f.match_id === fixture.response.fixture.id)}
+										on:click={() => add(fixture)}
+									>
+										{#if show_translation}
+											{translations[fixture.response.teams.home.logo]} <img class='mx-2' loading='eager' src={fixture.response.teams.home.logo} height='16' alt=''> 
+											— 
+											<img class='mx-2' loading='eager' src={fixture.response.teams.away.logo} height='16' alt=''> {translations[fixture.response.teams.away.logo]}
+										{:else}
+											{fixture.response.teams.home.name} <img class='mx-2' loading='eager' src={fixture.response.teams.home.logo} height='16' alt=''> 
+											— 
+											<img class='mx-2' loading='eager' src={fixture.response.teams.away.logo} height='16' alt=''> {fixture.response.teams.away.name}
+										{/if}
+									</div>
+								{/if}
+							{/await}
+						{/each}
 					</div>
-					<div class='d-flex align-center ml-a'>
-						{chosen.length}&nbsp;<span class='muted'>/ {max_chosen}</span>
-						<form method='post' on:submit={() => loading = true}>
-							<input type='hidden' name='chosen' bind:value={_chosen}>
-							<Button disabled={chosen.length === 0 || loading} marquee class='ml-3'>Проголосовать</Button>
-						</form>
+
+					<div class='1/1 p-3 d-flex b0 md:b1 mt-3 cat' style='position: sticky; background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url({$page.url.origin}/vote_bg_output.gif); background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; border-radius: var(--border-radius);'>
+						<div class='d-flex align-center'>
+							<Switch id='show_translation' bind:checked={show_translation} />
+							<!-- svelte-ignore a11y-label-has-associated-control -->
+							<label class='ml-3'>Перевод</label>
+						</div>
+						<div class='d-flex align-center ml-a'>
+							{chosen.length}&nbsp;<span class='muted'>/ {max_chosen}</span>
+							<form method='post' on:submit={() => loading = true}>
+								<input type='hidden' name='chosen' bind:value={_chosen}>
+								<Button disabled={chosen.length === 0 || loading} marquee class='ml-3'>Проголосовать</Button>
+							</form>
+						</div>
 					</div>
-				</div>
-			{/await}
-		</div>
+				{/await}
+			</div>
+		{:else}
+			<div class='d-grid place-center 100h' style='text-align: center;'>
+				<Button on:click={start}>Начать</Button>
+			</div>
+		{/if}
 	{/if}
 {/if}
 
