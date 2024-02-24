@@ -155,9 +155,9 @@
 										on:click={() => add(fixture)}
 									>
 										{#if show_translation}
-											{translations[fixture.response.teams.home.logo]} <img class='mx-2' loading='eager' src={fixture.response.teams.home.logo} height='16' alt=''> 
+											{translations[fixture.response.teams.home.logo] || fixture.response.teams.home.name} <img class='mx-2' loading='eager' src='{$page.url.origin}/images/{fixture.response.teams.home.id}.png' height='16' alt=''> 
 											— 
-											<img class='mx-2' loading='eager' src={fixture.response.teams.away.logo} height='16' alt=''> {translations[fixture.response.teams.away.logo]}
+											<img class='mx-2' loading='eager' src='{$page.url.origin}/images/{fixture.response.teams.away.id}.png' height='16' alt=''> {translations[fixture.response.teams.away.logo] || fixture.response.teams.away.name}
 										{:else}
 											{fixture.response.teams.home.name} <img class='mx-2' loading='eager' src='{$page.url.origin}/images/{fixture.response.teams.home.id}.png' height='16' alt=''> 
 											— 
