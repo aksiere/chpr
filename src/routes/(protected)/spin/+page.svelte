@@ -102,13 +102,15 @@
 	<div class='wrapper my-2' bind:this={wrapper} bind:clientWidth={wrapperInnerWidth}>
 		<div class='indicator'></div>
 		<div class='items'>
-			{#if items}
-				{#each items as { icon, title, rarity }, i}
-					<div class='item {rarity}'>
-						{@html icon || title || ''}
-					</div>
-				{/each}
-			{/if}
+			{#key items}
+				{#if items.length > 0}
+					{#each items as { icon, title, rarity }, i}
+						<div class='item {rarity}'>
+							{@html icon || title || ''}
+						</div>
+					{/each}
+				{/if}
+			{/key}
 		</div>
 	</div>
 
