@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms'
 	import { onDestroy } from 'svelte'
 	import { browser } from '$app/environment'
+	import { page } from '$app/stores'
 
 	import Button from '$lib/components/Button.svelte'
 	import { blur, fly, fade, scale } from 'svelte/transition'
@@ -15,8 +16,11 @@
 	let worker
 	let wrapperInnerWidth
 
+	let audio
+
 	onDestroy(() => {
 		worker?.terminate()
+		audio?.pause()
 	})
 
 	let showModal = false
@@ -28,6 +32,8 @@
 	}
 
 	const spin = (n, offset = 50) => {
+		audio = new Audio(`${$page.url.origin}/baraban_1995_hq.mp3`)
+		audio.play()
 		spinning = true
 		spin_text = 'Крутим...'
 		availableSpins--
@@ -63,6 +69,7 @@
 				showModal = true
 				spinning = false
 				spin_text = 'Крутить!'
+				audio?.pause()
 			}
 		}
 	}
