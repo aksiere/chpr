@@ -9,6 +9,7 @@
 	{#if label}
 		<p class='label mb-2'>{label}</p>
 	{/if}
+	<slot/>
 	<input type='text' bind:this={_this} bind:value={value} {...$$restProps} class:fluid={fluid}>
 	<!-- <div class='bg'></div> -->
 </div>

@@ -63,7 +63,7 @@
 	{:else}
 		<div class='d-grid place-center 100h'>
 			<!-- <p class='muted'>Подгружаю чаты...</p> -->
-			<Loading />
+			<Loading cat={session.user.user_metadata.custom?.cat} />
 		</div>
 	{/if}
 {:else}

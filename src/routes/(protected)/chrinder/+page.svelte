@@ -334,7 +334,9 @@
 		const t1 = logo.split('/')
 		const t2 = +t1.at(-1).split('.').at(0)
 		const { data } = await supabase.from('translations').select('translation_adl').eq('team_id', t2)
-		translations[logo] = data[0].translation_adl.charAt(0).toUpperCase() + data[0].translation_adl.slice(1)
+		if (data[0].translation_adl) {
+			translations[logo] = data[0].translation_adl.charAt(0).toUpperCase() + data[0].translation_adl.slice(1)
+		}
 	}
 
 	const getTranslation3 = async (where) => {
@@ -468,7 +470,7 @@
 		</div>
 	{:else}
 		<!-- <img class='no-select' draggable='false' src='./XyliGun.gif' alt='loading'> -->
-		<Loading/>
+		<Loading cat={session.user.user_metadata.custom?.cat} />
 	{/if}
 </div>
 

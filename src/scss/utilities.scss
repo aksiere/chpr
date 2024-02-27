@@ -81,6 +81,9 @@
 	
 		@for $c from 0 through 100 {
 			[class~="#{$breakpoint-prefix}#{$c}h"] { height: calc(#{$c} * 1%); }
+			[class~="#{$breakpoint-prefix}#{$c}w"] { width: calc(#{$c} * 1%); }
+			[class~="#{$breakpoint-prefix}h"] { height: auto; }
+			[class~="#{$breakpoint-prefix}w"] { width: auto; }
 			[class~="#{$breakpoint-prefix}#{$c}vh"] { height: #{$c}vh; }
 			[class~="#{$breakpoint-prefix}#{$c}svh"] { height: #{$c}svh; }
 			[class~="#{$breakpoint-prefix}#{$c}lvh"] { height: #{$c}lvh; }

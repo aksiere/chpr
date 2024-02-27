@@ -132,7 +132,7 @@
 			<div class='box 100h'>
 				{#await getCandidates()}
 					<div class='d-grid place-center 100h'>
-						<Loading />
+						<Loading cat={session.user.user_metadata.custom?.cat} />
 					</div>
 				{:then}
 					<div class='flex p-3'>

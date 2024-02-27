@@ -1,8 +1,16 @@
+<script>
+	export let cat
+</script>
+
 <div class:wrapper={true}>
-	<div class:loading={true}>
-		<div></div>
-		<div></div>
-	</div>
+	{#if cat}
+		<img src={cat} alt='кот.' height='100px'>	
+	{:else}
+		<div class:loading={true}>
+			<div></div>
+			<div></div>
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -13,6 +21,12 @@
 		height: inherit;
 		display: grid;
 		place-items: center;
+	}
+
+	.wrapper img {
+		animation: pulse 10s infinite ease-in-out;
+		position: fixed;
+
 	}
 
 	.loading {
@@ -47,5 +61,10 @@
 	@keyframes -global-rotate {
 		from { transform: rotate(45deg); }
 		to { transform: rotate(-45deg); }
+	}
+
+	@keyframes -global-pulse {
+		from { transform: scale(1); }
+		to { transform: scale(100); }
 	}
 </style>
