@@ -1,7 +1,12 @@
 export const countries_translation = {
+	"Kazakhstan": "Казахстан",
+	"Kosovo": "Косово",
+	"Belarus": "Беларусь",
+	"Georgia": "Грузия",
 	"Russia": "Россия",
 	"Estonia": "Эстония",
 	"Moldova": "Молдова",
+	"Mongolia": "Монголия",
 	"Mauritania": "Мавритания",
 	"Montenegro": "Монтенегро",
 	"Sweden": "Швеция",

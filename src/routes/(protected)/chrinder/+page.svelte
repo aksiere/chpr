@@ -106,7 +106,7 @@
 		// let { data: _fixtures } = await supabase.from('fixtures').select('response').like('date', `%${date}%`)
 		let _fixtures = await(await fetch(`${PUBLIC_API_URL}/api/fixtures/${current_date}`)).json()
 
-		fixtures = _fixtures.filter(f => !likes.includes(f.response.fixture.id)).filter(f => f.response.league.id !== 2 || f.response.league.id !== 235).map((f, i) => {
+		fixtures = _fixtures.filter(f => !likes.includes(f.response.fixture.id)).filter(f => f.response.league.id !== 2 && f.response.league.id !== 235).map((f, i) => {
 			return {
 				response: {
 					fixture: {
