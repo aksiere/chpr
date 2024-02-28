@@ -1,4 +1,7 @@
 export const countries_translation = {
+	"Russia": "Россия",
+	"Estonia": "Эстония",
+	"Moldova": "Молдова",
 	"Mauritania": "Мавритания",
 	"Montenegro": "Монтенегро",
 	"Sweden": "Швеция",
