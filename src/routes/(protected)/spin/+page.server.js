@@ -179,8 +179,15 @@ export const actions = {
 		
 		// get free spins
 		let { data: spins } = await supabase.from('spins').select('*').limit(1).order('created_at', { ascending: false }).eq('user_id', session.user.id)
-		const timeTilLastFreeSpin = spins.length > 0 ? ((new Date().getTime() / 1000) - (new Date(spins[0]?.created_at).getTime() / 1000)) / 60 / 60 / 24 : 1
-		freeSpins = timeTilLastFreeSpin < 1 ? 0 : 1
+		// const timeTilLastFreeSpin = spins.length > 0 ? ((new Date().getTime() / 1000) - (new Date(spins[0]?.created_at).getTime() / 1000)) / 60 / 60 / 24 : 1
+		
+		let getAvaiFreeSpinDate = new Date(spins[0]?.created_at)
+			getAvaiFreeSpinDate.setDate(getAvaiFreeSpinDate.getDate() + 1)
+			getAvaiFreeSpinDate.setHours(0)
+			getAvaiFreeSpinDate.setMinutes(0)
+			getAvaiFreeSpinDate.setSeconds(0)
+			getAvaiFreeSpinDate.setMilliseconds(0)
+		freeSpins = new Date().getTime() > getAvaiFreeSpinDate.getTime() ? 1 : 0
 
 		// get asset spins
 		let { data: assets } = await supabase.from('assets').select('*').eq('asset', 'spins').eq('user_id', session.user.id)
