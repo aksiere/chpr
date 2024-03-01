@@ -9,7 +9,7 @@
 	import Button from '$lib/components/Button.svelte'
 
 	export let data
-	let { supabase, until, liked_at, timestamp, message } = data
+	let { session, supabase, until, liked_at, timestamp, message } = data
 
 	$: seconds = Math.floor(until % 60)
 	$: minutes = Math.floor((until / 60) % 60)
