@@ -86,7 +86,7 @@ export const actions = {
 			user_id: session.user.id,
 			match_id: e.match_id,
 			timestamp: e.timestamp,
-			points: 1,
+			points: 2,
 		}))
 
 		const now = new Date(Date.now() + offset)
