@@ -27,7 +27,7 @@ const getDates = (now) => {
 	let s2 = setZero(new Date(now.getTime()))
 		s2.setDate((s2.getDate()) - ((s2.getDay() || 7) - 1) + 7)
 	let e2 = setZero(new Date(now.getTime()))
-		e2.setDate((e2.getDate()) - ((e2.getDay() || 7) - 1) + 7 + (VOTE_DAY || 7))
+		e2.setDate((e2.getDate()) - ((e2.getDay() || 7) - 1) + 7 + (VOTE_DAY || 7) + 1)
 
 	return {
 		s1, e1, s2, e2
